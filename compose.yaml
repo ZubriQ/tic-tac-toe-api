@@ -1,0 +1,22 @@
+﻿services:
+  tictactoe.api:
+    image: tictactoe.api
+    container_name: TicTacToe.Api
+    build:
+      context: .
+      dockerfile: src/TicTacToe.Api/Dockerfile
+    ports:
+      - 8080:8080
+      - 8081:8081
+
+  tictactoe.database:
+    image: postgres:latest
+    container_name: TicTacToe.Database
+    environment:
+      - POSTGRES_DB=tictactoe
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./.containers/db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
